@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Engineer Portfolio</title>
+
+    <style>
+        /* ▼ 全体背景：淡いブルーのグラデーション */
+        body {
+            margin: 0;
+            font-family: "Helvetica", "Arial", sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #f7faff, #eef3ff);
+        }
+
+        /* ▼ セクションの左ライン（雑誌レイアウト風） */
+        section {
+            padding: 80px 20px;
+            max-width: 1000px;
+            margin: 0 auto;
+            border-left: 3px solid #d0d7ff;
+            padding-left: 30px;
+        }
+
+        section + section {
+            margin-top: -3px;
+        }
+
+        /* ▼ おしゃれヘッダー（左寄せに調整） */
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: linear-gradient(135deg, #ffffffdd, #f0f4ffdd);
+            backdrop-filter: blur(10px);
+            border-bottom: 2px solid #b8c6ff;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            z-index: 1000;
+
+            display: flex;
+            justify-content: flex-start; /* ← 左寄せを確実に */
+        }
+
+        /* ▼ メニューを左寄せ */
+        nav {
+            display: flex;
+            justify-content: flex-start;
+            gap: 30px;
+            padding: 15px 30px;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: #333;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+
+        nav a:hover {
+            color: #0078ff;
+        }
+
+        @media (max-width: 600px) {
+            nav { gap: 15px; padding-left: 20px; }
+            nav a { font-size: 14px; }
+        }
+
+        /* Profile Section */
+        #profile {
+            margin-top: 50px;
+            margin-bottom: 40px;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 1s ease-out;
+        }
+
+        #profile.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .profile-wrapper {
+            display: flex;
+            align-items: center;
+            gap: 30px;
+            margin-top: 20px;
+        }
+
+        .profile-photo {
+            width: 160px;
+            height: 160px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 4px solid #e0e6ff;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+
+        .profile-text { flex: 1; }
+
+        .profile-name {
+            font-size: 28px;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .profile-title {
+            font-size: 18px;
+            color: #666;
+            margin-bottom: 10px;
+        }
+
+        .profile-desc {
+            font-size: 16px;
+            color: #444;
+            line-height: 1.7;
+            max-width: 600px;
+        }
+
+        @media (max-width: 700px) {
+            .profile-wrapper {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            .profile-photo { margin-bottom: 15px; }
+        }
+
+        /* About timeline */
+        .vertical-flow {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 25px;
+            margin-top: 40px;
+        }
+
+        .flow-item {
+            width: 80%;
+            padding: 20px;
+            background: #f5f7ff;
+            border-radius: 10px;
+            border: 1px solid #d0d7ff;
+            opacity: 0;
+            filter: brightness(0.4);
+            transform: translateY(40px) scale(0.95);
+            transition: all 1.2s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+
+        .flow-item.show {
+            opacity: 1;
+            filter: brightness(1);
+            transform: translateY(0) scale(1);
+        }
+
+        .flow-line {
+            width: 2px;
+            height: 0;
+            border-left: 2px dashed #999;
+            transition: height 1s ease-out;
+        }
+
+        .flow-line.show { height: 40px; }
+
+        /* Skills */
+        .skills-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 15px;
+            margin-top: 10px;
+        }
+
+        .skill-item {
+            padding: 15px;
+            background: #ffffff;
+            border-radius: 8px;
+            text-align: center;
+            font-weight: bold;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+            transition: none;
+        }
+
+        /* Projects */
+        .project {
+            margin-bottom: 30px;
+            padding: 20px;
+            border: 1px solid #ddd;
+            background: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .project:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.12);
+        }
+
+        /* Contact */
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        input, textarea {
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            font-size: 16px;
+        }
+
+        button {
+            padding: 12px;
+            background: #0078ff;
+            color: #fff;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        button:hover { background: #005fcc; }
+
+        html { scroll-behavior: smooth; }
+    </style>
+</head>
+
+<body>
+
+<header>
+    <nav>
+        <a href="#profile">Profile</a>
+        <a href="#about">About Me</a>
+        <a href="#projects">Projects</a>
+        <a href="#skills">Skills</a>
+        <a href="#contact">Contact</a>
+    </nav>
+</header>
+
+<section id="profile">
+    <h2>Profile</h2>
+
+    <div class="profile-wrapper">
+        <img src="profileImg.jpg" alt="プロフィール写真" class="profile-photo">
+
+        <div class="profile-text">
+            <div class="profile-name">あきお</div>
+            <div class="profile-title">システムエンジニア</div>
+            <p class="profile-desc">
+                外資系コンサルティングファーム所属<br><br>
+                ↓お気軽にご相談ください<br>
+                ・システムを開発して業務を効率化したい！<br>
+                ・お店のホームページを作成したい！<br>
+                ・システム開発のお手伝いをしてほしい<br>
+                ・就職活動やキャリアで悩んでいる<br>
+                etc...
+            </p>
+        </div>
+    </div>
+</section>
+
+<section id="about">
+    <h2>About Me</h2>
+
+    <div class="vertical-flow">
+
+        <div class="flow-item">
+            <h3>2019～2023</h3>
+            <p>
+                東京理科大学・理学部<br>
+                &nbsp;&nbsp;数学/情報専攻<br>
+                &nbsp;&nbsp;アルゴリズムの研究室に所属
+            </p>
+        </div>
+
+        <div class="flow-line"></div>
+
+        <div class="flow-item">
+            <h3>2023～2025</h3>
+            <p>
+                自社開発企業<br>
+                &nbsp;&nbsp;設計事務所のWebシステム新規開発～リリース・追加改修を経験
+            </p>
+        </div>
+
+        <div class="flow-line"></div>
+
+        <div class="flow-item">
+            <h3>2025～</h3>
+            <p>
+                外資系コンサルティングファーム<br>
+                &nbsp;&nbsp;金融機関Webシステムの設計・案件マネジメントを担当
+            </p>
+        </div>
+
+    </div>
+</section>
+
+<section id="projects">
+    <h2>Projects</h2>
+
+    <div class="project">
+        <h3>鍼灸院様ホームページ</h3>
+        <p>
+            清掃会社様の依頼情報管理システム<br>
+            開発期間：1か月<br>
+            開発費用：6万円<br>
+            運用費・管理費：毎月8000円<br>
+            <a href="鍼灸院.png" target="_blank">本システムのサンプル画像はこちら（背景画像をフリー素材に差し替えています）</a>
+        </p>
+    </div>
+
+    <div class="project">
+        <h3>物件管理システム</h3>
+        <p>
+            清掃会社様の依頼情報管理システム刷新<br>
+            開発期間：4か月<br>
+            開発費用：90万円<br>
+            運用費：毎月5万円前後（毎日数千件の画像をアップロード・管理するためサーバーの費用）<br>
+            管理費：毎月2万円（小規模修正・サーバーダウン時対応など）<br>
+            <a href="物件管理.png" target="_blank">本システムのサンプル画像はこちら</a>
+        </p>
+    </div>
+<!--
+    <div class="project">
+        <h3>金融系システム開発</h3>
+        <p>Java/Spring Bootを用いた大規模システム開発に従事。</p>
+    </div>
+-->
+</section>
+
+<section id="skills">
+    <h2>Skills</h2>
+
+    <h3>Languages</h3>
+    <div class="skills-list">
+        <div class="skill-item">Java</div>
+        <div class="skill-item">JavaScript</div>
+        <div class="skill-item">HTML</div>
+        <div class="skill-item">CSS</div>
+        <div class="skill-item">OracleSQL</div>
+    </div>
+
+    <h3>Frameworks / Libraries</h3>
+    <div class="skills-list">
+        <div class="skill-item">Spring Boot</div>
+        <div class="skill-item">Laravel</div>
+    </div>
+
+    <h3>Cloud / Tools</h3>
+    <div class="skills-list">
+        <div class="skill-item">AWS</div>
+        <div class="skill-item">Git</div>
+        <div class="skill-item">Linux</div>
+    </div>
+</section>
+
+<section id="contact">
+    <h2>Contact</h2>
+    <p>
+        お問い合わせは下記のメールアドレスまで<br><br>
+        askbussac@outlook.jp
+    </p>
+    <!--
+    <form>
+        <input type="text" placeholder="お名前">
+        <input type="email" placeholder="メールアドレス">
+        <textarea rows="5" placeholder="お問い合わせ内容"></textarea>
+        <button type="submit">送信</button>
+    </form>
+-->
+</section>
+
+<script>
+    window.history.scrollRestoration = "manual";
+
+    const items = document.querySelectorAll('.flow-item');
+    const lines = document.querySelectorAll('.flow-line');
+    const profile = document.querySelector('#profile');
+
+    const observer = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+
+                if (entry.target.classList.contains('flow-item')) {
+                    const index = Array.from(items).indexOf(entry.target);
+                    entry.target.style.transitionDelay = `${index * 0.4}s`;
+
+                    if (entry.target === items[2]) {
+                        entry.target.style.transitionDelay = "0.4s";
+                    }
+                }
+
+                entry.target.classList.add('show');
+            }
+        });
+    }, { threshold: 0.2 });
+
+    observer.observe(profile);
+    items.forEach(item => observer.observe(item));
+    lines.forEach(line => observer.observe(line));
+</script>
+
+</body>
+</html>
