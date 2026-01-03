@@ -125,20 +125,28 @@
         }
 
         @media (max-width: 600px) {
+            header {
+                justify-content: flex-end;
+                padding-right: 10px;
+            }
+
             .hamburger {
                 display: block;
+                margin-left: auto;
             }
 
             nav {
                 position: absolute;
                 top: 60px;
-                left: 0;
-                width: 100%;
+                right: 0;
+                width: 70%;
                 background: #fff;
                 flex-direction: column;
                 gap: 0;
                 display: none;
                 border-bottom: 2px solid #b8c6ff;
+                border-left: 1px solid #eee;
+                box-shadow: -2px 4px 10px rgba(0,0,0,0.1);
             }
 
             nav.show {
@@ -492,9 +500,25 @@
     /* ▼ ハンバーガーメニュー */
     const hamburger = document.querySelector('.hamburger');
     const nav = document.querySelector('nav');
+    const navLinks = document.querySelectorAll('nav a');
 
     hamburger.addEventListener('click', () => {
         nav.classList.toggle('show');
+    });
+
+    /* ▼ メニュー内リンククリックで閉じる */
+    navLinks.forEach(link => {
+        link.addEventListener('click', () => {
+            nav.classList.remove('show');
+        });
+    });
+
+    /* ▼ リロード時にアンカーへ飛ばない */
+    window.addEventListener('load', () => {
+        if (window.location.hash) {
+            window.scrollTo(0, 0);
+            history.replaceState(null, "", window.location.pathname);
+        }
     });
 </script>
 
