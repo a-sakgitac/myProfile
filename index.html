@@ -4,24 +4,19 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <!-- 🔍 SEO 基本設定 -->
     <title>Raito | Webエンジニア ポートフォリオ</title>
     <meta name="description" content="Webシステム開発・ホームページ作成・Spring Boot・AWSを中心に活動するエンジニアのポートフォリオ。設計から開発、運用まで一貫して対応します。">
 
-    <!-- 🔗 Canonical（重複URL対策） -->
     <link rel="canonical" href="https://engineerportfolio.work/">
 
-    <!-- 📱 OGP（SNSシェア最適化） -->
     <meta property="og:title" content="Raito | Webエンジニア ポートフォリオ">
     <meta property="og:description" content="Webシステム開発・UI/UX改善・Spring Boot・AWSを中心に活動するエンジニアのポートフォリオ。">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://engineerportfolio.work/">
     <meta property="og:image" content="https://engineerportfolio.work/ogp.png">
 
-    <!-- 🐦 Twitterカード -->
     <meta name="twitter:card" content="summary_large_image">
 
-    <!-- 🧭 構造化データ（Googleに“誰のサイトか”を伝える） -->
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
@@ -35,7 +30,6 @@
     }
     </script>
 
-    <!-- 🔎 h1 を非表示で追加（SEO強化） -->
     <style>
         .visually-hidden {
             position: absolute;
@@ -48,7 +42,6 @@
             border: 0;
         }
 
-        /* ▼ 全体背景：淡いブルーのグラデーション */
         body {
             margin: 0;
             font-family: "Helvetica", "Arial", sans-serif;
@@ -57,11 +50,12 @@
             background: linear-gradient(135deg, #f7faff, #eef3ff);
         }
 
-        /* ▼ 全セクションを包むラッパー（縦線を1本だけ描く） */
+        /* ▼ 全体ラッパー（PCは左寄せ40px） */
         .main-wrapper {
             position: relative;
             max-width: 1000px;
-            margin: 0 auto;
+            margin-left: 40px;
+            margin-right: auto;
             padding-left: 30px;
         }
 
@@ -74,12 +68,21 @@
             border-left: 3px solid #d0d7ff;
         }
 
-        /* ▼ セクション */
+        @media (max-width: 600px) {
+            .main-wrapper {
+                padding-left: 10px;
+                margin-left: 0;
+            }
+            .main-wrapper::before {
+                display: none;
+            }
+        }
+
         section {
             padding: 80px 20px;
         }
 
-        /* ▼ おしゃれヘッダー（左寄せ） */
+        /* ▼ ヘッダー */
         header {
             position: fixed;
             top: 0;
@@ -90,6 +93,7 @@
             box-shadow: 0 2px 10px rgba(0,0,0,0.05);
             z-index: 1000;
             display: flex;
+            align-items: center;
             justify-content: flex-start;
         }
 
@@ -110,12 +114,44 @@
             color: #0078ff;
         }
 
-        @media (max-width: 600px) {
-            nav { gap: 15px; padding-left: 20px; }
-            nav a { font-size: 14px; }
+        /* ▼ ハンバーガー */
+        .hamburger {
+            display: none;
+            font-size: 28px;
+            background: none;
+            border: none;
+            padding: 15px 20px;
+            cursor: pointer;
         }
 
-        /* Profile Section */
+        @media (max-width: 600px) {
+            .hamburger {
+                display: block;
+            }
+
+            nav {
+                position: absolute;
+                top: 60px;
+                left: 0;
+                width: 100%;
+                background: #fff;
+                flex-direction: column;
+                gap: 0;
+                display: none;
+                border-bottom: 2px solid #b8c6ff;
+            }
+
+            nav.show {
+                display: flex;
+            }
+
+            nav a {
+                padding: 15px 20px;
+                border-top: 1px solid #eee;
+            }
+        }
+
+        /* ▼ Profile */
         #profile {
             padding-top: 120px;
             margin-bottom: 40px;
@@ -174,7 +210,7 @@
             .profile-photo { margin-bottom: 15px; }
         }
 
-        /* About timeline */
+        /* ▼ Timeline */
         .vertical-flow {
             display: flex;
             flex-direction: column;
@@ -210,7 +246,7 @@
 
         .flow-line.show { height: 40px; }
 
-        /* Skills */
+        /* ▼ Skills */
         .skills-list {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
@@ -227,7 +263,7 @@
             box-shadow: 0 4px 12px rgba(0,0,0,0.08);
         }
 
-        /* Projects */
+        /* ▼ Projects */
         .project {
             margin-bottom: 30px;
             padding: 20px;
@@ -243,7 +279,7 @@
             box-shadow: 0 8px 20px rgba(0,0,0,0.12);
         }
 
-        /* Contact */
+        /* ▼ Contact */
         .contact-box {
             background: #ffffff;
             padding: 30px;
@@ -282,6 +318,7 @@
 <h1 class="visually-hidden">Raito | Webエンジニア ポートフォリオ</h1>
 
 <header>
+    <button class="hamburger" aria-label="menu">☰</button>
     <nav>
         <a href="#profile">自己紹介</a>
         <a href="#about">経歴</a>
@@ -294,7 +331,7 @@
 <div class="main-wrapper">
 
     <section id="profile">
-        <h2>自己紹介（Profile）</h2>
+        <h2>自己紹介</h2>
 
         <div class="profile-wrapper">
             <img src="profileImg.jpg" alt="Raitoのプロフィール写真" class="profile-photo">
@@ -316,7 +353,7 @@
     </section>
 
     <section id="about">
-        <h2>経歴（About Me）</h2>
+        <h2>経歴</h2>
 
         <div class="vertical-flow">
 
@@ -353,7 +390,7 @@
     </section>
 
     <section id="projects">
-        <h2>制作実績（Projects）</h2>
+        <h2>制作実績</h2>
 
         <div class="project">
             <h3>鍼灸院ホームページ</h3>
@@ -385,7 +422,7 @@
     </section>
 
     <section id="skills">
-        <h2>スキルセット（Skills）</h2>
+        <h2>スキルセット</h2>
 
         <h3>Languages</h3>
         <div class="skills-list">
@@ -411,7 +448,7 @@
     </section>
 
     <section id="contact">
-        <h2>お問い合わせ（Contact）</h2>
+        <h2>お問い合わせ</h2>
 
         <div class="contact-box">
             <div class="contact-icon">✉</div>
@@ -451,6 +488,14 @@
     observer.observe(profile);
     items.forEach(item => observer.observe(item));
     lines.forEach(line => observer.observe(line));
+
+    /* ▼ ハンバーガーメニュー */
+    const hamburger = document.querySelector('.hamburger');
+    const nav = document.querySelector('nav');
+
+    hamburger.addEventListener('click', () => {
+        nav.classList.toggle('show');
+    });
 </script>
 
 </body>
