@@ -3,9 +3,51 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Engineer Portfolio</title>
 
+    <!-- 🔍 SEO 基本設定 -->
+    <title>Akio（Raito） | Webエンジニア ポートフォリオ</title>
+    <meta name="description" content="Webシステム開発・UI/UX改善・Spring Boot・AWSを中心に活動するエンジニアのポートフォリオ。設計から開発、運用まで一貫して対応します。">
+
+    <!-- 🔗 Canonical（重複URL対策） -->
+    <link rel="canonical" href="https://engineerportfolio.work/">
+
+    <!-- 📱 OGP（SNSシェア最適化） -->
+    <meta property="og:title" content="Akio（Raito） | Webエンジニア ポートフォリオ">
+    <meta property="og:description" content="Webシステム開発・UI/UX改善・Spring Boot・AWSを中心に活動するエンジニアのポートフォリオ。">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://engineerportfolio.work/">
+    <meta property="og:image" content="https://engineerportfolio.work/ogp.png">
+
+    <!-- 🐦 Twitterカード -->
+    <meta name="twitter:card" content="summary_large_image">
+
+    <!-- 🧭 構造化データ（Googleに“誰のサイトか”を伝える） -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "name": "Akio（Raito）",
+      "jobTitle": "Webエンジニア",
+      "url": "https://engineerportfolio.work",
+      "sameAs": [
+        "https://github.com/a-kio"
+      ]
+    }
+    </script>
+
+    <!-- 🔎 h1 を非表示で追加（SEO強化） -->
     <style>
+        .visually-hidden {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0,0,0,0);
+            border: 0;
+        }
+
         /* ▼ 全体背景：淡いブルーのグラデーション */
         body {
             margin: 0;
@@ -75,7 +117,7 @@
 
         /* Profile Section */
         #profile {
-            padding-top: 120px; /* ← margin ではなく padding に変更 */
+            padding-top: 120px;
             margin-bottom: 40px;
             opacity: 0;
             transform: translateY(30px);
@@ -144,7 +186,7 @@
         .flow-item {
             width: 80%;
             padding: 20px;
-            background: #ffffff; /* ← 白に変更 */
+            background: #ffffff;
             border-radius: 10px;
             border: 1px solid #c5ccff;
             opacity: 0;
@@ -201,7 +243,7 @@
             box-shadow: 0 8px 20px rgba(0,0,0,0.12);
         }
 
-        /* Contact（おしゃれ版） */
+        /* Contact */
         .contact-box {
             background: #ffffff;
             padding: 30px;
@@ -237,23 +279,25 @@
 
 <body>
 
+<h1 class="visually-hidden">Akio（Raito） | Webエンジニア ポートフォリオ</h1>
+
 <header>
     <nav>
-        <a href="#profile">Profile</a>
-        <a href="#about">About Me</a>
-        <a href="#projects">Projects</a>
-        <a href="#skills">Skills</a>
-        <a href="#contact">Contact</a>
+        <a href="#profile">自己紹介</a>
+        <a href="#about">経歴</a>
+        <a href="#projects">制作実績</a>
+        <a href="#skills">スキルセット</a>
+        <a href="#contact">お問い合わせ</a>
     </nav>
 </header>
 
 <div class="main-wrapper">
 
     <section id="profile">
-        <h2>Profile</h2>
+        <h2>自己紹介（Profile）</h2>
 
         <div class="profile-wrapper">
-            <img src="profileImg.jpg" alt="プロフィール写真" class="profile-photo">
+            <img src="profileImg.jpg" alt="Raitoのプロフィール写真" class="profile-photo">
 
             <div class="profile-text">
                 <div class="profile-name">Raito</div>
@@ -272,7 +316,7 @@
     </section>
 
     <section id="about">
-        <h2>About Me</h2>
+        <h2>経歴（About Me）</h2>
 
         <div class="vertical-flow">
 
@@ -280,8 +324,8 @@
                 <h3>2019～2023</h3>
                 <p>
                     東京理科大学・理学部<br>
-                    &nbsp;&nbsp;数学/情報専攻<br>
-                    &nbsp;&nbsp;アルゴリズムの研究室に所属
+                    数学/情報専攻<br>
+                    アルゴリズムの研究室に所属
                 </p>
             </div>
 
@@ -291,7 +335,7 @@
                 <h3>2023～2025</h3>
                 <p>
                     自社開発企業<br>
-                    &nbsp;&nbsp;設計事務所のWebシステム新規開発～リリース・追加改修を経験
+                    設計事務所のWebシステム新規開発～リリース・追加改修を経験
                 </p>
             </div>
 
@@ -301,7 +345,7 @@
                 <h3>2025～</h3>
                 <p>
                     外資系コンサルティングファーム<br>
-                    &nbsp;&nbsp;金融機関Webシステムの設計・案件マネジメントを担当
+                    金融機関Webシステムの設計・案件マネジメントを担当
                 </p>
             </div>
 
@@ -309,7 +353,7 @@
     </section>
 
     <section id="projects">
-        <h2>Projects</h2>
+        <h2>制作実績（Projects）</h2>
 
         <div class="project">
             <h3>鍼灸院ホームページ</h3>
@@ -318,8 +362,10 @@
                 開発期間：1か月<br>
                 開発費用：6万円<br>
                 運用費・管理費：毎月8000円<br>
-                <a href="鍼灸院.png" target="_blank">本システムのサンプル画像はこちら</a>
             </p>
+            <a href="鍼灸院.png" target="_blank">
+                <img src="鍼灸院.png" alt="鍼灸院ホームページのサンプル画像" style="width:100%; border-radius:8px;">
+            </a>
         </div>
 
         <div class="project">
@@ -330,14 +376,16 @@
                 開発費用：90万円<br>
                 運用費：毎月5万円前後<br>
                 管理費：毎月2万円<br>
-                <a href="物件管理.png" target="_blank">本システムのサンプル画像はこちら</a>
             </p>
+            <a href="物件管理.png" target="_blank">
+                <img src="物件管理.png" alt="物件管理システムのサンプル画像" style="width:100%; border-radius:8px;">
+            </a>
         </div>
 
     </section>
 
     <section id="skills">
-        <h2>Skills</h2>
+        <h2>スキルセット（Skills）</h2>
 
         <h3>Languages</h3>
         <div class="skills-list">
@@ -363,7 +411,7 @@
     </section>
 
     <section id="contact">
-        <h2>Contact</h2>
+        <h2>お問い合わせ（Contact）</h2>
 
         <div class="contact-box">
             <div class="contact-icon">✉</div>
